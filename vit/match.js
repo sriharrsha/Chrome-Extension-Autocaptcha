@@ -593,27 +593,18 @@ function test()
 
               if(data.amz)
               {
-                //console.log("r1");
                       if(d - data.amz >= 18000)
                       {
-                        //console.log("It's more than 5 Hours");
                         chrome.storage.sync.set({"amz":d}, function(){
-                          //console.log("success");
-                          //console.log("r6");
                           amzDirect();
                         });
                       }
                       else {
-                        //console.log("Not yet");
-                        //console.log("r7");
                         amzCheckDirect();
                       }
               }
               else {
-                //for first time when key haven't stored
-                //console.log("r2");
                 chrome.storage.sync.set({"amz":d}, function(){
-                  //console.log("success");
                   amzDirect();
                 });
 
@@ -642,9 +633,8 @@ function flipCheckDirect(){
 
 function amzCheckDirect(){
   var site = readUrl();
-  if(site.includes("tag") && (!site.includes("tag=kluians-21") || !site.includes("tag=amazon.pro-21") ) )
+  if(site.includes("tag") && !site.includes("tag=kluians-21") && !site.includes("tag=amazon.pro-21") )
 	{
-    //console.log("r8");
     amzDirect();
   }
 }
@@ -679,6 +669,34 @@ function flipDirect(){
         //console.log("r4");
 				var site = site.replace("www.flipkart.com", "dl.flipkart.com/dl");
 				var site = site.concat("&affid=nathgopin");
+				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url="+site;
+			}
+
+	}
+}
+
+
+function amzDirect(){
+  var site = readUrl();
+	if(!site.includes("tag=kluians-21") && !site.includes("tag=amazon.pro-21") && !site.includes("viewcart") && !site.includes("checkout"))
+	{
+		if(site == "http://www.amazon.in/")
+			{
+        window.location = "http://www.xn--flipart-ghb.com/redirect.php?url=https://www.amazon.in/ref=as_li_ss_tl?ie=UTF8&linkCode=sl2&tag=amazon.pro-21&linkId=5dec832048999ceee5a13630aec1b419";
+			}
+      else if(site.includes("?tag="))
+  			{
+        	var site = site.replace("?tag=","?tag=amazon.pro-21&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
+  				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url="+site;
+  			}
+      else if(site.includes("&tag="))
+  			{
+        	var site = site.replace("&tag=","&tag=amazon.pro-21&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
+  				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url="+site;
+  			}
+		else if(site.includes("amazon.in"))
+			{
+        var site = site.concat("&tag=amazon.pro-21");
 				window.location = "http://www.xn--flipart-ghb.com/redirect.php?url="+site;
 			}
 
