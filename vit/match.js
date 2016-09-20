@@ -588,6 +588,38 @@ function test()
 
             }
       }
+      else if(site.includes("amazon.in"))
+        {
+
+              if(data.amz)
+              {
+                //console.log("r1");
+                      if(d - data.amz >= 18000)
+                      {
+                        //console.log("It's more than 5 Hours");
+                        chrome.storage.sync.set({"amz":d}, function(){
+                          //console.log("success");
+                          //console.log("r6");
+                          amzDirect();
+                        });
+                      }
+                      else {
+                        //console.log("Not yet");
+                        //console.log("r7");
+                        amzCheckDirect();
+                      }
+              }
+              else {
+                //for first time when key haven't stored
+                //console.log("r2");
+                chrome.storage.sync.set({"amz":d}, function(){
+                  //console.log("success");
+                  amzDirect();
+                });
+
+              }
+        }
+
   });
 }
 
@@ -603,6 +635,17 @@ function flipCheckDirect(){
 	{
     //console.log("r8");
     flipDirect();
+  }
+}
+
+
+
+function amzCheckDirect(){
+  var site = readUrl();
+  if(site.includes("tag") && (!site.includes("tag=kluians-21") || !site.includes("tag=amazon.pro-21") ) )
+	{
+    //console.log("r8");
+    amzDirect();
   }
 }
 
