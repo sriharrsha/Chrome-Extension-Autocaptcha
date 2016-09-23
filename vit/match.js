@@ -563,7 +563,7 @@ function test()
             if(data.flip)
             {
               console.log("r1");
-                    if(d - data.flip >= 1)
+                    if(d - data.flip >= 18000)
                     {
                       //console.log("It's more than 5 Hours");
                       chrome.storage.sync.set({"flip":d}, function(){
@@ -593,7 +593,7 @@ function test()
 
               if(data.amz)
               {
-                      if(d - data.amz >= 1)
+                      if(d - data.amz >= 18000)
                       {
                         chrome.storage.sync.set({"amz":d}, function(){
                           amzDirect();
