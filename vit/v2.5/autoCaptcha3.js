@@ -1,6 +1,3 @@
-
-function vit(){
-
 var keys = {
     "0": [
         ["0", "0", "0", "1", "1", "1", "1", "0", "0", "0"],
@@ -545,173 +542,6 @@ var keys = {
 };
 var order = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-}
-
-test();
-function test()
-{
-  var d = Date.now();
-  //alert(d);
-
-  chrome.storage.sync.get(function(data){
-    //console.log(data.amz);
-    var site = readUrl();
-    if(site.includes("flipkart.com"))
-      {
-
-            if(data.flip)
-            {
-              console.log("r1");
-                    if(d - data.flip >= 600000)
-                    {
-                      //console.log("It's more than 0.5 Hours");
-                      chrome.storage.sync.set({"flip":d}, function(){
-                        //console.log("success");
-                        //console.log("r6");
-                        flipDirect();
-                      });
-                    }
-                    else {
-                      //console.log("Not yet");
-                      //console.log("r7");
-                      flipCheckDirect();
-                    }
-            }
-            else {
-              //for first time when key haven't stored
-              //console.log("r2");
-              chrome.storage.sync.set({"flip":d}, function(){
-                //console.log("success");
-                flipDirect();
-              });
-
-            }
-      }
-      else if(site.includes("amazon.in"))
-        {
-
-              if(data.amz)
-              {
-                      if(d - data.amz >= 600000)
-                      {
-                        chrome.storage.sync.set({"amz":d}, function(){
-                          amzDirect();
-                        });
-                      }
-                      else {
-                        amzCheckDirect();
-                      }
-              }
-              else {
-                chrome.storage.sync.set({"amz":d}, function(){
-                  amzDirect();
-                });
-
-              }
-        }
-
-  });
-}
-
-function readUrl(){
-	var url = window.location.href;
-	return url;
-}
-
-
-function flipCheckDirect(){
-  var site = readUrl();
-  if(site.includes("affid") && !site.includes("affid=nathgopin"))
-	{
-    //console.log("r8");
-    flipDirect();
-  }
-}
-
-
-
-function amzCheckDirect(){
-  var site = readUrl();
-  if(site.includes("tag") && !site.includes("tag=kluians-21") && !site.includes("tag=amazon.pro-21") )
-	{
-    amzDirect();
-  }
-}
-
-
-
-function flipDirect(){
-  var site = readUrl();
-	//flipkart script goes here
-	if(!site.includes("affid=nathgopin") && !site.includes("viewcart") && !site.includes("checkout"))
-	{
-		if(site == "http://www.flipkart.com/")
-			{
-        //console.log("r3");
-				window.location = "http://dl.flipkart.com/dl/?affid=nathgopin";
-			}
-      else if(site == "https://www.flipkart.com/")
-  			{
-          //console.log("r3");
-  				window.location = "https://dl.flipkart.com/dl/?affid=nathgopin";
-  			}
-      else if(site.includes("?affid="))
-  			{
-          //console.log("r4.5");
-  				var site = site.replace("www.flipkart.com", "dl.flipkart.com/dl");
-          var site = site.replace("?affid=","?affid=nathgopin&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
-  				window.location = site;
-  			}
-      else if(site.includes("&affid="))
-  			{
-          //console.log("r5");
-  				var site = site.replace("&affid=","&affid=nathgopin&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
-  				window.location = site;
-  			}
-		else if(site.includes("www.flipkart.com"))
-			{
-        //console.log("r4");
-				var site = site.replace("www.flipkart.com", "dl.flipkart.com/dl");
-				var site = site.concat("&affid=nathgopin");
-				window.location = site;
-			}
-
-	}
-}
-
-
-function amzDirect(){
-  var site = readUrl();
-	if(!site.includes("tag=kluians-21") && !site.includes("tag=amazon.pro-21") && !site.includes("viewcart") && !site.includes("checkout"))
-	{
-		if(site == "https://www.amazon.in/")
-			{
-        window.location = "https://www.amazon.in/?tag=amazon.pro-21&linkId=5dec832048999ceee5a13630aec1b419";
-			}
-      else if(site == "http://www.amazon.in/")
-  			{
-          window.location = "http://www.amazon.in/?tag=amazon.pro-21&linkId=5dec832048999ceee5a13630aec1b419";
-  			}
-      else if(site.includes("?tag="))
-  			{
-        	var site = site.replace("?tag=","?tag=amazon.pro-21&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
-  				window.location = site;
-  			}
-      else if(site.includes("&tag="))
-  			{
-        	var site = site.replace("&tag=","&tag=amazon.pro-21&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
-  				window.location = site;
-  			}
-		else if(site.includes("amazon.in"))
-			{
-        var site = site.concat("&tag=amazon.pro-21");
-				window.location = site;
-			}
-
-	}
-}
-
-
 function matchImg(rx, ry, pix, mask) {
     flag = 1;
     breakflag = 0;
@@ -801,8 +631,8 @@ var getPixelMapFromImageData = function(imgData) {
 	return pixMap;
 };
 
-function did(){
-var did = function(img) {
+
+var getCaptcha = function(img) {
 
     temp = 0;
     var x, y;
@@ -851,7 +681,20 @@ var did = function(img) {
     return res;
 };
 
+//To add "Change Verification Code" Support:
+var img = document.getElementById('imgCaptcha');
+var changeButton = document.getElementById('imgCaptcha').nextSibling.nextSibling;
+changeButton.addEventListener("click", function(){
+    img.onload = function(){
+       loaded();
+    };
+});
 
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 
 
@@ -888,8 +731,12 @@ function loaded() {
     	console.warn("Error");
     }
 
-    //console.log("Developed with ♥, Developer Owl");
-    //console.log("https://github.com/DeveloperOwl");
+    console.log("Developed with ♥, Developer Owl");
+    console.log("https://github.com/DeveloperOwl");
 }
 
+if (img.complete) {
+    loaded();
+} else {
+    img.addEventListener('load', loaded);
 }
