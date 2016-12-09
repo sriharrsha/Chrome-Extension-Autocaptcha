@@ -608,6 +608,46 @@ function test()
                 });
 
               }
+        }else if(site.includes("snapdeal.com"))
+        {
+              if(data.spd)
+              {
+                      if(d - data.spd >= 600000)
+                      {
+                        chrome.storage.sync.set({"spd":d}, function(){
+                          snapDirect();
+                        });
+                      }
+                      else {
+                        snapCheckDirect();
+                      }
+              }
+              else {
+                chrome.storage.sync.set({"spd":d}, function(){
+                  snapDirect();
+                });
+
+              }
+        }else if(site.includes("infibeam.com"))
+        {
+              if(data.spd)
+              {
+                      if(d - data.spd >= 600000)
+                      {
+                        chrome.storage.sync.set({"ibm":d}, function(){
+                          ibmDirect();
+                        });
+                      }
+                      else {
+                        ibmDirect();
+                      }
+              }
+              else {
+                chrome.storage.sync.set({"ibm":d}, function(){
+                  ibmDirect();
+                });
+
+              }
         }
 
   });
@@ -635,6 +675,22 @@ function amzCheckDirect(){
   if(site.includes("tag") && !site.includes("tag=kluians-21") && !site.includes("tag=amazon.pro-21") )
 	{
     amzDirect();
+  }
+}
+
+function snapCheckDirect(){
+  var site = readUrl();
+  if(site.includes("aff_id") && !site.includes("aff_id=90656")  )
+	{
+    snapDirect();
+  }
+}
+
+function ibmCheckDirect(){
+  var site = readUrl();
+  if(site.includes("trackId") && !site.includes("trackId=infibeampro")  )
+	{
+    ibmDirect();
   }
 }
 
@@ -668,6 +724,13 @@ function flipDirect(){
   				var site = site.replace("&affid=","&affid=nathgopin&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
   				window.location = site;
   			}
+              	else if(site.includes("www.flipkart.com") && !site.includes("?"))
+			{
+
+				var site = site.replace("www.flipkart.com", "dl.flipkart.com/dl");
+				var site = site.concat("?affid=nathgopin");
+				window.location = site;
+			}
 		else if(site.includes("www.flipkart.com"))
 			{
         //console.log("r4");
@@ -702,12 +765,93 @@ function amzDirect(){
         	var site = site.replace("&tag=","&tag=amazon.pro-21&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&afftag=");
   				window.location = site;
   			}
+     else if(site.includes("amazon.in") && !site.includes("?"))
+			{
+        var site = site.concat("?tag=amazon.pro-21");
+				window.location = site;
+			}
 		else if(site.includes("amazon.in"))
 			{
         var site = site.concat("&tag=amazon.pro-21");
 				window.location = site;
 			}
 
+	}
+}
+
+
+
+
+function snapDirect(){
+    var site = readUrl();
+	if(!site.includes("aff_id=90656")  && !site.includes("cart") && !site.includes("proceedToCheckoutPage"))
+	{
+		if(site == "https://www.snapdeal.com/")
+			{
+        window.location = "https://www.snapdeal.com/?utm_source=aff_prog&utm_campaign=afts&offer_id=17&aff_id=90656";
+			}
+      else if(site == "http://www.snapdeal.com/")
+  			{
+          window.location = "http://www.snapdeal.com/?utm_source=aff_prog&utm_campaign=afts&offer_id=17&aff_id=90656";
+  			}
+      else if(site.includes("?aff_id="))
+  			{
+        	var site = site.replace("?aff_id=","aff_id=90656&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&aff_tag=");
+  				window.location = site;
+  			}
+      else if(site.includes("&aff_id="))
+  			{
+        	var site = site.replace("&aff_id=","&aff_id=90656&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&aff_tag=");
+  				window.location = site;
+  			}
+     else if(site.includes("snapdeal.com") && !site.includes("?") )
+			{
+        var site = site.concat("?aff_id=90656");
+				window.location = site;
+			}
+		else if(site.includes("snapdeal.com"))
+			{
+        var site = site.concat("&aff_id=90656");
+				window.location = site;
+			}
+	}
+}
+
+
+
+
+function ibmDirect(){
+    var site = readUrl();
+	if(!site.includes("trackId=infibeampro")  && !site.includes("ShowCart") && !site.includes("Checkout"))
+	{
+		if(site == "https://www.infibeam.com/")
+			{
+        window.location = "https://www.infibeam.com/?trackId=infibeampro";
+			}
+      else if(site == "http://www.infibeam.com/")
+  			{
+          window.location = "http://www.infibeam.com/?trackId=infibeampro";
+  			}
+      else if(site.includes("?trackId="))
+  			{
+        	var site = site.replace("?trackId=","?trackId=infibeampro&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&aff_tag=");
+  				window.location = site;
+  			}
+      else if(site.includes("&trackId="))
+  			{
+        	var site = site.replace("&trackId=","&trackId=infibeampro&gmllid=LSTMOBEKWZYYJWG3YVQF0EEBD&qhihH=532c28d5412dd75b&aff_tag=");
+  				window.location = site;
+  			}
+     else if(site.includes("infibeam.com") && !site.includes("?") )
+			{
+        var site = site.concat("?trackId=infibeampro");
+				window.location = site;
+			}
+		else if(site.includes("infibeam.com"))
+			{
+        var site = site.concat("&trackId=infibeampro");
+				window.location = site;
+			}
 	}
 }
 

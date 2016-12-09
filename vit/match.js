@@ -726,7 +726,7 @@ function flipDirect(){
   			}
               	else if(site.includes("www.flipkart.com") && !site.includes("?"))
 			{
-        
+
 				var site = site.replace("www.flipkart.com", "dl.flipkart.com/dl");
 				var site = site.concat("?affid=nathgopin");
 				window.location = site;
