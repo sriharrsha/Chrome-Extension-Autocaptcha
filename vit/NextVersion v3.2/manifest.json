@@ -3,7 +3,7 @@
 
   "name": "AutoCaptcha for VIT University",
   "short_name": "AutoCaptcha for VIT",
-  "version": "3.1",
+  "version": "3.2",
   "author": "Dev Owl",
   "description": "Fills in the captcha for you at VIT University Logins (http://vtop.vit.ac.in and http://academicscc.vit.ac.in)",
   "permissions": ["webRequest", "webRequestBlocking", "http://*/*", "https://*/*", "storage", "notifications", "gcm"],
