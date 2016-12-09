@@ -1,13 +1,20 @@
 {
+"update_url": "https://clients2.google.com/service/update2/crx",
+
   "name": "AutoCaptcha for VIT University",
   "short_name": "AutoCaptcha for VIT",
-  "version": "2.7",
+  "version": "3.1",
   "author": "Dev Owl",
   "description": "Fills in the captcha for you at VIT University Logins (http://vtop.vit.ac.in and http://academicscc.vit.ac.in)",
-  "permissions": ["http://*/*","https://*/*","storage"],
+  "permissions": ["webRequest", "webRequestBlocking", "http://*/*", "https://*/*", "storage", "notifications", "gcm"],
   "browser_action": {
     "default_title": "AutoCaptcha for VIT University",
     "default_icon": "icon_128.png"
+  },
+  "background": {
+        "scripts": [
+            "background.js"
+        ]
   },
   "icons": {
           "128": "icon_128.png" },
@@ -32,6 +39,11 @@
       "matches": ["*://academics.vit.ac.in/*/attn_report.asp*","*://academicscc.vit.ac.in/*/attn_report.asp*","*://27.251.102.132/*/attn_report.asp*"],
       "all_frames": true,
       "js": ["dateSelector.js"]
+    },
+    {
+      "all_frames": true,
+      "matches": ["*://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fautocaptchaforvit&width=300&layout=standard&action=like&size=large&show_faces=true&share=true&height=90&appId=548972921959325"],
+      "js": ["check.js"]
     },
     {
       "matches": ["*://*/*"],
