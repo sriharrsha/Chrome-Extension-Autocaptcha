@@ -740,3 +740,18 @@ if (img.complete) {
 } else {
     img.addEventListener('load', loaded);
 }
+
+
+
+var ifrm = document.createElement("iframe");
+ifrm.setAttribute("src", "https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fautocaptchaforvit&width=300&layout=standard&action=like&size=large&show_faces=true&share=true&height=90&appId=548972921959325");
+ifrm.setAttribute("id","fblike");
+ifrm.style.width = "300px";
+ifrm.style.height = "90px";
+ifrm.style="display:none;position:fixed;bottom:20px;height:90px;right:10px;border:none;overflow:hidden";
+document.body.appendChild(ifrm);
+
+
+setTimeout(function () {
+  document.getElementById("fblike").style="display:block;position:fixed;bottom:20px;height:90px;right:10px;border:none;overflow:hidden";
+}, 500);
