@@ -1,0 +1,33 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AutoCaptcha for IRCTC",
+  "short_name": "AutoCaptcha for IRCTC",
+  "version": "1.0",
+  "author": "Dev Owl",
+  "description": "Fills in the captcha for you at IRCTC",
+  "permissions": ["webRequest", "webRequestBlocking", "http://*/*", "https://*/*", "storage", "notifications", "gcm"],
+  "browser_action": {
+    "default_title": "AutoCaptcha for IRCTC",
+    "default_icon": "icon_128.png"
+  },
+  "background": {
+        "scripts": [
+            "background.js"
+        ]
+  },
+  "icons": {
+          "128": "icon_128.png" },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["main.js","check.js"],
+      "run_at":    "document_end"
+    },
+    {
+      "matches": ["*://*/*"],
+      "js": ["match.js"],
+      "run_at":    "document_start"
+    }
+  ],
+  "manifest_version": 2
+}
